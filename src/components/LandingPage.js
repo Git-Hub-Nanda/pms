@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import design_verifications from "../images/design_verifications.jpg";
 import fpga_design_services from "../images/fpga_design_services.jpg";
 import HeaderComponent from "./HeadComponent";
@@ -20,9 +20,9 @@ class HomeComponent extends React.Component {
   componentDidMount() {
     this.loadProducts();
   }
-  handleViewProduct = (p) =>{
-    this.props.navigate("/view", { state: { product: p } });  
-  }
+  handleViewProduct = (p) => {
+    this.props.navigate("/view", { state: { product: p } });
+  };
   loadProducts = () => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
@@ -43,22 +43,22 @@ class HomeComponent extends React.Component {
         while (itr2 < itr + 3 && itr2 < this.state.products.length) {
           let p = this.state.products[itr2];
           itemsPerView.push(
-            <div className="flex-item"  key={p.id}>
-                  <img
-                    className="d-block w-100"
-                    src={p.thumbnail}
-                    alt="Slide"
-                    onClick={() => this.handleViewProduct(p)}
-                  />
-                </div>
+            <div className="flex-item" key={p.id}>
+              <img
+                className="d-block w-100"
+                src={p.thumbnail}
+                alt="Slide"
+                onClick={() => this.handleViewProduct(p)}
+              />
+            </div>
           );
           itr2++;
         }
-        carouselItems.push(<Carousel.Item key={itr}>
-          <div className="d-flex centered">
-            {itemsPerView}
-          </div>
-        </Carousel.Item>)
+        carouselItems.push(
+          <Carousel.Item key={itr}>
+            <div className="d-flex centered">{itemsPerView}</div>
+          </Carousel.Item>
+        );
       }
     }
     return (
@@ -85,10 +85,12 @@ class HomeComponent extends React.Component {
               </p>
             </div>
             <div className="m-25p">
-            <Link to="/list" className="sbc">
-              <h3 >Shop Now</h3>
+              <Link to="/list" className="sbc">
+                <h3>Shop Now</h3>
               </Link>
-              <Carousel data-bs-theme="dark" indicators = {false}>{carouselItems}</Carousel>
+              <Carousel data-bs-theme="dark" indicators={false}>
+                {carouselItems}
+              </Carousel>
             </div>
             <div className="img2-container">
               <img
@@ -106,7 +108,6 @@ class HomeComponent extends React.Component {
 }
 
 const HomePageWithRouter = () => {
-
   const navigate = useNavigate();
   return <HomeComponent navigate={navigate} />;
 };
